@@ -39,34 +39,11 @@ func createDay(day int) {
 	inputFile := filepath.Join(baseDir, "input.txt")
 	readmeFile := filepath.Join(baseDir, "README.md")
 
-	mainContent := `package main
-
-import (
-    "fmt"
-    "io/ioutil"
-    "log"
-    "strings"
-)
-
-func main() {
-    data, err := ioutil.ReadFile("input.txt")
-    if err != nil {
-        log.Fatal(err)
-    }
-    input := strings.TrimSpace(string(data))
-    fmt.Println("Input:", input)
-}
-
-func part1(input string) int {
-	// Part 1 Solution
-	return 0
-}
-
-func part2(input string) int {
-	// Part 2 Solution
-	return 0
-}
-`
+	mainContent, err := os.ReadFile("cli/solution_template/template.go")
+	if err != nil {
+		fmt.Printf("Error reading template: %v\n", err)
+		os.Exit(1)
+	}
 
 	if err := os.WriteFile(mainFile, []byte(mainContent), 0644); err != nil {
 		fmt.Printf("Error creating main.go: %v\n", err)
